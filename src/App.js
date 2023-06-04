@@ -1,23 +1,27 @@
 import { useState } from "react";
 import PersonsList from "./components/PersonsList";
 import data from './data/data';
-import './App.css';
+import { Container, Heading, Flex, Button } from "@chakra-ui/react";
 
 function App() {
   const [ people, setPeople ] = useState(data);
+  const [ btnText, setBtnText ] = useState(false);
 
   const clearList = () => {
     setPeople([]);
+    setBtnText(true);
   }
 
   return (
-    <div className="wrapper">
-      <h1>Birthday Reminder</h1>
+    <Container>
+      <Heading as='h1' align='center' my='20px' color='teal'>Birthday Reminder</Heading>
       <ul>
         <PersonsList people={ people } />
       </ul>
-      <button onClick={ clearList }>Clear List</button>
-    </div>
+      <Flex justifyContent='center'>
+        <Button onClick={ clearList } colorScheme='teal'> { btnText ? 'Reload the Page' : 'Clear the List' } </Button>
+      </Flex>
+    </Container>
   );
 }
 
